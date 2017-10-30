@@ -1,5 +1,6 @@
 package com.boston.codingdojo;
 
+// Adding comment to confirm git picks up change (just this comment)
 class GildedRose {
     Item[] items;
 
