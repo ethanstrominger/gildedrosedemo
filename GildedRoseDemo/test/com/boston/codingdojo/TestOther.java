@@ -15,10 +15,16 @@ public class TestOther {
 	}
 
 	@Test
-	public void testQualityChangeByTwoWhenDaysToExpireZeroOrNeg() {
+	public void testQualityDecreaseByTwoWhenDaysToExpireZeroOrNeg() {
 		// last three params are sellIn, quality, expected quality
 		TestGildedRoseUtil.testQuality(ITEM_OTHER, 0, 40, 38);
 		TestGildedRoseUtil.testQuality(ITEM_OTHER, 0, 34, 32);
+	}
+
+	@Test
+	public void testQualityOfOneDoesNotGoesNegativeWhenDecreaseByTwo() {
+	// last three params are sellIn, quality, expected quality
+		TestGildedRoseUtil.testQuality(ITEM_OTHER, -1, 1, 0);
 	}
 
 	@Test
