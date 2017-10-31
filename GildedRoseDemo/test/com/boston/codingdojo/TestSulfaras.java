@@ -13,10 +13,17 @@ public class TestSulfaras {
 	}
 
 	@Test
-	public void testQualityNot50() {
+	public void testErrorQualityNot50() {
 		// last three params are sellIn, quality, expected quality
 		testQuality(GildedRose.ITEM_SULFARAS, 8, 55, 55);
 		testQuality(GildedRose.ITEM_SULFARAS, 4, 45, 45);
+	}
+
+	@Test
+	public void testErrorQualityZeroOrNegative() {
+		// last three params are sellIn, quality, expected quality
+		testQuality(GildedRose.ITEM_SULFARAS, 7, 0, 0);
+		testQuality(GildedRose.ITEM_SULFARAS, 2, 45, 45);
 	}
 
 	public void testQuality(String itemName, int daysToExpire, int quality, int expectedQuality) {
