@@ -1,10 +1,10 @@
 package com.boston.codingdojo;
 
-class GildedRose {
+public class GildedRose {
     public static final String ITEM_PASS = "Backstage passes to a TAFKAL80ETC concert";
 	public static final String ITEM_BRIE = "Aged Brie";
 	public static final String ITEM_SULFARAS = "Sulfuras, Hand of Ragnaros";
-	Item[] items;
+	public Item[] items;
 
     public GildedRose(Item[] items) {
         this.items = items;
