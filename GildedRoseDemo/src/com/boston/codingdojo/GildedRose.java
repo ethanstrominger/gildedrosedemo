@@ -1,9 +1,11 @@
 package com.boston.codingdojo;
 
 public class GildedRose {
+
 	public static final String ITEM_PASS = "Backstage passes to a TAFKAL80ETC concert";
 	public static final String ITEM_BRIE = "Aged Brie";
 	public static final String ITEM_SULFARAS = "Sulfuras, Hand of Ragnaros";
+	
 	public Item[] items;
 
 	public GildedRose(Item[] items) {
@@ -13,60 +15,7 @@ public class GildedRose {
 	public void updateQuality() {
 		int increment = 0;
 		for (int i = 0; i < items.length; i++) {
-			switch (items[i].name) {
-			case ITEM_SULFARAS:
-				continue;
-			case ITEM_BRIE:
-				if (items[i].sellIn > 0) {
-					increment = 1;
-				} else {
-					increment = 2;
-				}
-				if (items[i].quality < 50) {
-					items[i].quality += increment;
-					if (items[i].quality > 50) {
-						items[i].quality = 50;
-					}
-				}
-				items[i].sellIn--;
-				continue;
-			case ITEM_PASS:
-				if (items[i].sellIn > 10) {
-					increment = 1;
-				} else if (items[i].sellIn > 5) {
-					increment = 2;
-				} else if (items[i].sellIn > 0) {
-					increment = 3;
-				}
-				// increment <= 0
-				else {
-					increment = -items[i].quality;
-				}
-
-				if (items[i].quality < 50) {
-					items[i].quality += increment;
-					if (items[i].quality > 50) {
-						items[i].quality = 50;
-					}
-				}
-				items[i].sellIn--;
-				continue;
-			default:
-				if (items[i].sellIn > 0) {
-					increment = -1;
-				} else {
-					increment = -2;
-				}
-				if (items[i].quality > 0) {
-					items[i].quality += increment;
-					if (items[i].quality < 0) {
-						items[i].quality = 0;
-					}
-				}
-				items[i].sellIn--;
-				continue;
-			}
-
+			((ItemExtended)items[i]).updateQuality();
 		}
 	}
 }
