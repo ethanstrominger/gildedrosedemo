@@ -8,35 +8,20 @@ public class TestSulfaras {
 
 	@Test
 	public void testQualityDoesNotChange() {
-		String itemName = GildedRose.ITEM_SULFARAS;
-		int daysToExpire = 5;
-		int quality = 80;
-		int expectedQuality = 80;
-		Item[] items = {new Item(itemName,daysToExpire,quality)};
-		GildedRose gildedRose = new GildedRose(items);
-		gildedRose.updateQuality();
-		assertEquals (expectedQuality, gildedRose.items[0].quality);
+		// last three params are sellIn, quality, expected quality
+		testQuality(GildedRose.ITEM_SULFARAS, 5, 80, 80);
 	}
 
 	@Test
 	public void testQualityNot50() {
-		String itemName = GildedRose.ITEM_SULFARAS;
-		
-		// Test for 55
-		int daysToExpire = 8;
-		int quality = 55;
-		int expectedQuality = 55;
+		// last three params are sellIn, quality, expected quality
+		testQuality(GildedRose.ITEM_SULFARAS, 8, 55, 55);
+		testQuality(GildedRose.ITEM_SULFARAS, 4, 45, 45);
+	}
+
+	public void testQuality(String itemName, int daysToExpire, int quality, int expectedQuality) {
 		Item[] items = {new Item(itemName,daysToExpire,quality)};
 		GildedRose gildedRose = new GildedRose(items);
-		gildedRose.updateQuality();
-		assertEquals (expectedQuality, gildedRose.items[0].quality);
-		
-		// Test for 45
-		daysToExpire = 4;
-		quality = 45;
-		expectedQuality = 45;
-		items[0] = new Item(itemName,daysToExpire,quality);
-		gildedRose = new GildedRose(items);
 		gildedRose.updateQuality();
 		assertEquals (expectedQuality, gildedRose.items[0].quality);
 	}
