@@ -1,10 +1,10 @@
 package com.boston.codingdojo;
 
 public class ItemSulfaras extends ItemExtended {
-	String s = GildedRose.ITEM_PASS;
+	String s = ItemUtil.ITEM_PASS;
 
 	public ItemSulfaras(int sellIn, int quality) {
-		super(GildedRose.ITEM_SULFARAS, sellIn, quality);
+		super(ItemUtil.ITEM_SULFARAS, sellIn, quality);
 	}
 	
 	public int getIncrementAmount() {

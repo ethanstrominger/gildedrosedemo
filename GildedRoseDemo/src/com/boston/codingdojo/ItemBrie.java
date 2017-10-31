@@ -3,7 +3,7 @@ package com.boston.codingdojo;
 public class ItemBrie extends ItemExtended {
 
 	public ItemBrie(int sellIn, int quality) {
-		super(GildedRose.ITEM_BRIE, sellIn, quality);
+		super(ItemUtil.ITEM_BRIE, sellIn, quality);
 	}
 	
 	public int getIncrementAmount() {

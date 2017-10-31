@@ -3,7 +3,7 @@ package com.boston.codingdojo;
 public class ItemPass extends ItemExtended {
 
 	public ItemPass(int sellIn, int quality) {
-		super(GildedRose.ITEM_PASS, sellIn, quality);
+		super(ItemUtil.ITEM_PASS, sellIn, quality);
 	}
 	
 	public int getIncrementAmount() {
