@@ -19,11 +19,12 @@ public class GildedRose {
                 updateQualityBrieAndPass(item);
             }
 
-            decreaseSellinExcludesSulfaras(item);
-
-            if (item.sellIn < 0) {
+            if (item.sellIn <= 0) {
                 extraUpdateQualityWhenExpired(item);
             }
+
+            decreaseSellinExcludesSulfaras(item);
+
         }
     }
 
