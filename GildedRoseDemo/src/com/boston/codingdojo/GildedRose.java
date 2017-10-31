@@ -1,35 +1,35 @@
 package com.boston.codingdojo;
 
 public class GildedRose {
-    public static final String ITEM_PASS = "Backstage passes to a TAFKAL80ETC concert";
+	public static final String ITEM_PASS = "Backstage passes to a TAFKAL80ETC concert";
 	public static final String ITEM_BRIE = "Aged Brie";
 	public static final String ITEM_SULFARAS = "Sulfuras, Hand of Ragnaros";
 	public Item[] items;
 
-    public GildedRose(Item[] items) {
-        this.items = items;
-    }
+	public GildedRose(Item[] items) {
+		this.items = items;
+	}
 
-    public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            Item item = items[i];
-            if (itemIsSulfaras(item)) {
-            	continue;
-            }
+	public void updateQuality() {
+		for (int i = 0; i < items.length; i++) {
+			Item item = items[i];
+			if (itemIsSulfaras(item)) {
+				continue;
+			}
 			if (itemIsNotBrieOrPass(item)) {
-                updateQualityOther(item);
-            } else {
-                updateQualityBrieAndPass(item);
-            }
+				updateQualityOther(item);
+			} else {
+				updateQualityBrieAndPass(item);
+			}
 
-            if (itemIsExpired(item)) {
-                extraUpdateQualityWhenExpired(item);
-            }
+			if (itemIsExpired(item)) {
+				extraUpdateQualityWhenExpired(item);
+			}
 
-            decreaseSellinExcludesSulfaras(item);
+			decreaseSellinExcludesSulfaras(item);
 
-        }
-    }
+		}
+	}
 
 	private boolean itemIsSulfaras(Item item) {
 		if (item.name.equals(ItemUtil.ITEM_SULFARAS)) {
@@ -52,15 +52,15 @@ public class GildedRose {
 	 */
 	public void extraUpdateQualityWhenExpired(Item item) {
 		if (itemIsNotBrie(item)) {
-		    if (itemIsNotPass(item)) {
-		        updateQualityOther(item);
-		    } else {
-		        item.quality = item.quality - item.quality;
-		    }
+			// if (itemIsNotPass(item)) {
+			// updateQualityOther(item);
+			// } else {
+			item.quality = item.quality - item.quality;
+			// }
 		} else {
-		    if (item.quality < 50) {
-		        item.quality = item.quality + 1;
-		    }
+			if (item.quality < 50) {
+				item.quality = item.quality + 1;
+			}
 		}
 	}
 
@@ -69,7 +69,7 @@ public class GildedRose {
 	 */
 	public void decreaseSellinExcludesSulfaras(Item item) {
 		if (itemIsNotSulfaras(item)) {
-		    item.sellIn = item.sellIn - 1;
+			item.sellIn = item.sellIn - 1;
 		}
 	}
 
@@ -78,21 +78,21 @@ public class GildedRose {
 	 */
 	public void updateQualityBrieAndPass(Item item) {
 		if (item.quality < 50) {
-		    item.quality = item.quality + 1;
+			item.quality = item.quality + 1;
 
-		    if (itemIsPass(item)) {
-		        if (item.sellIn < 11) {
-		            if (item.quality < 50) {
-		                item.quality = item.quality + 1;
-		            }
-		        }
+			if (itemIsPass(item)) {
+				if (item.sellIn < 11) {
+					if (item.quality < 50) {
+						item.quality = item.quality + 1;
+					}
+				}
 
-		        if (item.sellIn < 6) {
-		            if (item.quality < 50) {
-		                item.quality = item.quality + 1;
-		            }
-		        }
-		    }
+				if (item.sellIn < 6) {
+					if (item.quality < 50) {
+						item.quality = item.quality + 1;
+					}
+				}
+			}
 		}
 	}
 
@@ -101,9 +101,10 @@ public class GildedRose {
 	 */
 	public void updateQualityOther(Item item) {
 		if (item.quality > 0) {
-		    if (itemIsNotSulfaras(item)) {
-		        item.quality = item.quality - 1;
-		    }
+			item.quality = item.quality - 1;	
+		}
+		if (item.quality > 0 && itemIsExpired(item)) {
+			item.quality = item.quality - 1;
 		}
 	}
 
@@ -144,7 +145,6 @@ public class GildedRose {
 	 * @return
 	 */
 	public boolean itemIsNotBrieOrPass(Item item) {
-		return itemIsNotBrie(item)
-		        && itemIsNotPass(item);
+		return itemIsNotBrie(item) && itemIsNotPass(item);
 	}
 }
