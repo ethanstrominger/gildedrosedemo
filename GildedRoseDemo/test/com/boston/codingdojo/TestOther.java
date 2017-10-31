@@ -22,7 +22,7 @@ public class TestOther {
 	}
 
 	@Test
-	public void testQualityOfOneDoesNotGoesNegativeWhenDecreaseByTwo() {
+	public void testQualityOfOneDoesNotGoesNegativeWhenDecreaseBy() {
 	// last three params are sellIn, quality, expected quality
 		TestGildedRoseUtil.testQuality(ITEM_OTHER, -1, 1, 0);
 	}
