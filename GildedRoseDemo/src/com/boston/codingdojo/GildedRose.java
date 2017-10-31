@@ -13,13 +13,16 @@ public class GildedRose {
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
             Item item = items[i];
+            if (itemIsSulfaras(item)) {
+            	continue;
+            }
 			if (itemIsNotBrieOrPass(item)) {
                 updateQualityOther(item);
             } else {
                 updateQualityBrieAndPass(item);
             }
 
-            if (item.sellIn <= 0) {
+            if (itemIsExpired(item)) {
                 extraUpdateQualityWhenExpired(item);
             }
 
@@ -27,6 +30,22 @@ public class GildedRose {
 
         }
     }
+
+	private boolean itemIsSulfaras(Item item) {
+		if (item.name.equals(ItemUtil.ITEM_SULFARAS)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * @param item
+	 * @return
+	 */
+	public boolean itemIsExpired(Item item) {
+		return item.sellIn <= 0;
+	}
 
 	/**
 	 * @param item
