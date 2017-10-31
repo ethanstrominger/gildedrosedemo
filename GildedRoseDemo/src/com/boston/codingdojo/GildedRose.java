@@ -1,8 +1,8 @@
 package com.boston.codingdojo;
 
-// Adding comment to confirm git picks up change (just this comment)
 class GildedRose {
-    Item[] items;
+    public static final String ITEM_SULFARAS = "Sulfuras, Hand of Ragnaros";
+	Item[] items;
 
     public GildedRose(Item[] items) {
         this.items = items;
@@ -13,7 +13,7 @@ class GildedRose {
             if (!items[i].name.equals("Aged Brie")
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                    if (!items[i].name.equals(ITEM_SULFARAS)) {
                         items[i].quality = items[i].quality - 1;
                     }
                 }
@@ -37,7 +37,7 @@ class GildedRose {
                 }
             }
 
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (!items[i].name.equals(ITEM_SULFARAS)) {
                 items[i].sellIn = items[i].sellIn - 1;
             }
 
@@ -45,7 +45,7 @@ class GildedRose {
                 if (!items[i].name.equals("Aged Brie")) {
                     if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                            if (!items[i].name.equals(ITEM_SULFARAS)) {
                                 items[i].quality = items[i].quality - 1;
                             }
                         }
