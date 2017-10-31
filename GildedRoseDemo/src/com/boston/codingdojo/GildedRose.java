@@ -14,54 +14,78 @@ public class GildedRose {
         for (int i = 0; i < items.length; i++) {
             Item item = items[i];
 			if (itemIsNotBrieOrPass(item)) {
-                if (item.quality > 0) {
-                    if (itemIsNotSulfaras(item)) {
-                        item.quality = item.quality - 1;
-                    }
-                }
+                updateQualityOther(item);
             } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-
-                    if (itemIsPass(item)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
-                }
+                updateQualityBrieAndPass(item);
             }
 
-            if (itemIsNotSulfaras(item)) {
-                item.sellIn = item.sellIn - 1;
-            }
+            decreaseSellinExcludesSulfaras(item);
 
             if (item.sellIn < 0) {
-                if (itemIsNotBrie(item)) {
-                    if (itemIsNotPass(item)) {
-                        if (item.quality > 0) {
-                            if (itemIsNotSulfaras(item)) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
-                    } else {
-                        item.quality = item.quality - item.quality;
-                    }
-                } else {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
-                }
+                extraUpdateQualityWhenExpired(item);
             }
         }
     }
+
+	/**
+	 * @param item
+	 */
+	public void extraUpdateQualityWhenExpired(Item item) {
+		if (itemIsNotBrie(item)) {
+		    if (itemIsNotPass(item)) {
+		        updateQualityOther(item);
+		    } else {
+		        item.quality = item.quality - item.quality;
+		    }
+		} else {
+		    if (item.quality < 50) {
+		        item.quality = item.quality + 1;
+		    }
+		}
+	}
+
+	/**
+	 * @param item
+	 */
+	public void decreaseSellinExcludesSulfaras(Item item) {
+		if (itemIsNotSulfaras(item)) {
+		    item.sellIn = item.sellIn - 1;
+		}
+	}
+
+	/**
+	 * @param item
+	 */
+	public void updateQualityBrieAndPass(Item item) {
+		if (item.quality < 50) {
+		    item.quality = item.quality + 1;
+
+		    if (itemIsPass(item)) {
+		        if (item.sellIn < 11) {
+		            if (item.quality < 50) {
+		                item.quality = item.quality + 1;
+		            }
+		        }
+
+		        if (item.sellIn < 6) {
+		            if (item.quality < 50) {
+		                item.quality = item.quality + 1;
+		            }
+		        }
+		    }
+		}
+	}
+
+	/**
+	 * @param item
+	 */
+	public void updateQualityOther(Item item) {
+		if (item.quality > 0) {
+		    if (itemIsNotSulfaras(item)) {
+		        item.quality = item.quality - 1;
+		    }
+		}
+	}
 
 	/**
 	 * @param item
