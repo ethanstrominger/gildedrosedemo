@@ -56,6 +56,22 @@ public class TestPass {
 	}
 
 	@Test
+	public void testNegativeQualityIncreasesToLessNegative() {
+		// last three params are sellIn, quality, expected quality
+		TestGildedRoseUtil.testQuality(ItemUtil.ITEM_PASS, 11, -8, -7);
+		TestGildedRoseUtil.testQuality(ItemUtil.ITEM_PASS, 8, -10, -8);
+		TestGildedRoseUtil.testQuality(ItemUtil.ITEM_PASS, 4, -6, -3);
+	}
+
+	@Test
+	public void testNegativeQualityGoesToZeroWhenExpired() {
+		// last three params are sellIn, quality, expected quality
+		TestGildedRoseUtil.testQuality(ItemUtil.ITEM_PASS, 0, -8, 0);
+		TestGildedRoseUtil.testQuality(ItemUtil.ITEM_PASS, -1, -10, 0);
+		TestGildedRoseUtil.testQuality(ItemUtil.ITEM_PASS, 4, -6, -3);
+	}
+
+	@Test
 	public void testDaysToExpireDecreasesByOneWhenQuality55_45_0_negative() {
 		// last three params are sellIn, quality, expected sellIn
 		TestGildedRoseUtil.testDaysToExpire(ItemUtil.ITEM_PASS, 7, 55, 6);
