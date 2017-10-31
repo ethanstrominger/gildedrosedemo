@@ -6,8 +6,6 @@ import org.junit.Test;
 
 public class TestOther {
 
-	Item[] items = {new ItemUtil().createItem("A",1,2)};
-
 	private static String ITEM_OTHER = "An arbitrary string";
 
 	@Test
