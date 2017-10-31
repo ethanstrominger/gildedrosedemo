@@ -1,7 +1,5 @@
 package com.boston.codingdojo;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class TestPass {
