@@ -47,14 +47,29 @@ public class GildedRose {
 		item.sellIn = item.sellIn - 1;
 	}
 
-	public void updateQualityBrie(Item item) {
-		if (item.quality < 50) {
-			item.quality = item.quality + 1;
-		}
-		if (itemIsExpired(item)) {
+	public void incrementItem(Item item, int incrementAmount) {
+		if (incrementAmount > 0) {
 			if (item.quality < 50) {
-				item.quality = item.quality + 1;
+				item.quality = item.quality + incrementAmount;
+				if (item.quality > 50) {
+					item.quality = 50;
+				}
 			}
+		} else if (incrementAmount < 0) {
+			if (item.quality > 0) {
+				item.quality = item.quality + incrementAmount;
+				if (item.quality < 0) {
+					item.quality = 0;
+				}
+			}
+		}
+	}
+
+	public void updateQualityBrie(Item item) {
+		if (itemIsExpired(item)) {
+			incrementItem(item, 2);
+		} else {
+			incrementItem(item, 1);
 		}
 	}
 
@@ -62,23 +77,14 @@ public class GildedRose {
 	 * @param item
 	 */
 	public void updateQualityPass(Item item) {
-		if (item.quality < 50) {
-			item.quality = item.quality + 1;
-
-			if (item.sellIn < 11) {
-				if (item.quality < 50) {
-					item.quality = item.quality + 1;
-				}
-			}
-
-			if (item.sellIn < 6) {
-				if (item.quality < 50) {
-					item.quality = item.quality + 1;
-				}
-			}
-		}
-		if (itemIsExpired(item)) {
-			item.quality = item.quality - item.quality;
+		if (item.sellIn > 10) {
+			incrementItem(item, 1);
+		} else if (item.sellIn > 5) {
+			incrementItem(item, 2);
+		} else if (item.sellIn > 0) {
+			incrementItem(item, 3);
+		} else {
+			incrementItem(item, -item.quality);
 		}
 	}
 
@@ -87,10 +93,11 @@ public class GildedRose {
 	 */
 	public void updateQualityOther(Item item) {
 		if (item.quality > 0) {
-			item.quality = item.quality - 1;
-		}
-		if (itemIsExpired(item) && item.quality > 0) {
-			item.quality = item.quality - 1;
+			if (itemIsExpired(item)) {
+				incrementItem (item, -2);
+			} else {
+				incrementItem (item, -1);
+			}
 		}
 	}
 
