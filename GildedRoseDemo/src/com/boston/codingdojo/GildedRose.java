@@ -18,8 +18,10 @@ public class GildedRose {
 			}
 			if (itemIsNotBrieOrPass(item)) {
 				updateQualityOther(item);
-			} else {
-				updateQualityBrieAndPass(item);
+			} else if (item.name.equals(ItemUtil.ITEM_BRIE)) {
+				updateQualityBrie(item);
+			} else if (item.name.equals(ItemUtil.ITEM_PASS)) {
+				updateQualityPass(item);
 			}
 
 			if (itemIsExpired(item)) {
@@ -53,12 +55,6 @@ public class GildedRose {
 	public void extraUpdateQualityWhenExpired(Item item) {
 		if (itemIsPass(item)) {
 			item.quality = item.quality - item.quality;
-//			if (itemIsNotBrie(item)) {
-//				if (itemIsNotPass(item)) {
-//					// updateQualityOther(item);
-//				} else {
-//					item.quality = item.quality - item.quality;
-//				}
 		} else if (itemIsBrie(item)) {
 			if (item.quality < 50) {
 				item.quality = item.quality + 1;
@@ -83,10 +79,16 @@ public class GildedRose {
 		}
 	}
 
+	public void updateQualityBrie(Item item) {
+		if (item.quality < 50) {
+			item.quality = item.quality + 1;
+		}
+	}
+
 	/**
 	 * @param item
 	 */
-	public void updateQualityBrieAndPass(Item item) {
+	public void updateQualityPass(Item item) {
 		if (item.quality < 50) {
 			item.quality = item.quality + 1;
 
@@ -113,8 +115,7 @@ public class GildedRose {
 		if (item.quality > 0) {
 			item.quality = item.quality - 1;
 		}
-		if (itemIsExpired(item) && item.quality > 0)
-		{
+		if (itemIsExpired(item) && item.quality > 0) {
 			item.quality = item.quality - 1;
 		}
 	}
