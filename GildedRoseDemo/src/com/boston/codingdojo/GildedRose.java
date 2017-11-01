@@ -24,10 +24,6 @@ public class GildedRose {
 				updateQualityPass(item);
 			}
 
-			if (itemIsExpired(item)) {
-				extraUpdateQualityWhenExpired(item);
-			}
-
 			decreaseSellinExcludesSulfaras(item);
 
 		}
@@ -47,19 +43,6 @@ public class GildedRose {
 	 */
 	public boolean itemIsExpired(Item item) {
 		return item.sellIn <= 0;
-	}
-
-	/**
-	 * @param item
-	 */
-	public void extraUpdateQualityWhenExpired(Item item) {
-		if (itemIsPass(item)) {
-			item.quality = item.quality - item.quality;
-		} else if (itemIsBrie(item)) {
-			if (item.quality < 50) {
-				item.quality = item.quality + 1;
-			}
-		}
 	}
 
 	private boolean itemIsBrie(Item item) {
@@ -83,6 +66,11 @@ public class GildedRose {
 		if (item.quality < 50) {
 			item.quality = item.quality + 1;
 		}
+		if (itemIsExpired(item)) {
+			if (item.quality < 50) {
+				item.quality = item.quality + 1;
+			}
+		}
 	}
 
 	/**
@@ -105,6 +93,9 @@ public class GildedRose {
 					}
 				}
 			}
+		}
+		if (itemIsExpired(item)) {
+			item.quality = item.quality - item.quality;
 		}
 	}
 
