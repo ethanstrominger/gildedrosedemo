@@ -32,17 +32,10 @@ public class GildedRose {
 
 	}
 
-	/**
-	 * @param item
-	 * @return
-	 */
 	public boolean itemIsExpired(Item item) {
 		return item.sellIn <= 0;
 	}
 
-	/**
-	 * @param item
-	 */
 	public void decreaseSellinExcludesSulfaras(Item item) {
 		item.sellIn = item.sellIn - 1;
 	}
@@ -73,9 +66,6 @@ public class GildedRose {
 		}
 	}
 
-	/**
-	 * @param item
-	 */
 	public void updateQualityPass(Item item) {
 		if (item.sellIn > 10) {
 			incrementItem(item, 1);
@@ -88,9 +78,6 @@ public class GildedRose {
 		}
 	}
 
-	/**
-	 * @param item
-	 */
 	public void updateQualityOther(Item item) {
 		if (item.quality > 0) {
 			if (itemIsExpired(item)) {
