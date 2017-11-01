@@ -13,28 +13,23 @@ public class GildedRose {
 	public void updateQuality() {
 		for (int i = 0; i < items.length; i++) {
 			Item item = items[i];
-			if (itemIsSulfaras(item)) {
+			switch (item.name) {
+			case ItemUtil.ITEM_SULFARAS:
 				continue;
-			}
-			if (itemIsNotBrieOrPass(item)) {
-				updateQualityOther(item);
-			} else if (item.name.equals(ItemUtil.ITEM_BRIE)) {
+			case ItemUtil.ITEM_BRIE:
 				updateQualityBrie(item);
-			} else if (item.name.equals(ItemUtil.ITEM_PASS)) {
+				break;
+			case ItemUtil.ITEM_PASS:
 				updateQualityPass(item);
+				break;
+			default:
+				updateQualityOther(item);
+				break;
 			}
 
 			decreaseSellinExcludesSulfaras(item);
-
 		}
-	}
 
-	private boolean itemIsSulfaras(Item item) {
-		if (item.name.equals(ItemUtil.ITEM_SULFARAS)) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
@@ -45,21 +40,11 @@ public class GildedRose {
 		return item.sellIn <= 0;
 	}
 
-	private boolean itemIsBrie(Item item) {
-		if (item.name.equals(ITEM_BRIE)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	/**
 	 * @param item
 	 */
 	public void decreaseSellinExcludesSulfaras(Item item) {
-		if (itemIsNotSulfaras(item)) {
-			item.sellIn = item.sellIn - 1;
-		}
+		item.sellIn = item.sellIn - 1;
 	}
 
 	public void updateQualityBrie(Item item) {
@@ -80,17 +65,15 @@ public class GildedRose {
 		if (item.quality < 50) {
 			item.quality = item.quality + 1;
 
-			if (itemIsPass(item)) {
-				if (item.sellIn < 11) {
-					if (item.quality < 50) {
-						item.quality = item.quality + 1;
-					}
+			if (item.sellIn < 11) {
+				if (item.quality < 50) {
+					item.quality = item.quality + 1;
 				}
+			}
 
-				if (item.sellIn < 6) {
-					if (item.quality < 50) {
-						item.quality = item.quality + 1;
-					}
+			if (item.sellIn < 6) {
+				if (item.quality < 50) {
+					item.quality = item.quality + 1;
 				}
 			}
 		}
@@ -111,43 +94,4 @@ public class GildedRose {
 		}
 	}
 
-	/**
-	 * @param item
-	 * @return
-	 */
-	public boolean itemIsNotPass(Item item) {
-		return !itemIsPass(item);
-	}
-
-	/**
-	 * @param item
-	 * @return
-	 */
-	public boolean itemIsNotBrie(Item item) {
-		return !item.name.equals(ITEM_BRIE);
-	}
-
-	/**
-	 * @param item
-	 * @return
-	 */
-	public boolean itemIsPass(Item item) {
-		return item.name.equals(ITEM_PASS);
-	}
-
-	/**
-	 * @param item
-	 * @return
-	 */
-	public boolean itemIsNotSulfaras(Item item) {
-		return !item.name.equals(ITEM_SULFARAS);
-	}
-
-	/**
-	 * @param item
-	 * @return
-	 */
-	public boolean itemIsNotBrieOrPass(Item item) {
-		return itemIsNotBrie(item) && itemIsNotPass(item);
-	}
 }
